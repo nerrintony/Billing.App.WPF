@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Test.ShopBilling.WPFApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ab0962c13d359bde7d5d3025fbf3f20e9c5669d3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a01b3f889c04e9e12d5a694ab185c80d02f97316")]
 [assembly: System.Reflection.AssemblyProductAttribute("Test.ShopBilling.WPFApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Test.ShopBilling.WPFApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

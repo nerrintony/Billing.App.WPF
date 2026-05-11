@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Test.ShopBilling.WPFApp.Models
+{
+    public class Product
+    {
+        public Guid ProductId { get; set; } = Guid.NewGuid();
+        public string ProductName { get; set; } = string.Empty;
+        public string? ProductDescription { get; set; }
+        public decimal ProductPrice { get; set; }
+        public int ProductQuantity { get; set; }
+        public DateTime DateTime { get; set; } = DateTime.Now;
+        public bool IsActive { get; set; } = true;
+    }
+}
