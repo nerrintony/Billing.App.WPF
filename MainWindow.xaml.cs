@@ -1,24 +1,46 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using Test.ShopBilling.WPFApp.Models;
+using Test.ShopBilling.WPFApp.Services;
 
 namespace Test.ShopBilling.WPFApp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly IProductService _productService;
+
+        public MainWindow(IProductService productService)
         {
             InitializeComponent();
+
+            _productService = productService;
+
+            Loaded += MainWindow_Loaded;
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await TestDatabase();
+        }
+
+        private async Task TestDatabase()
+        {
+            try
+            {
+                await _productService.AddProductAsync(new Product
+                {
+                    ProductName = "Rice",
+                    ProductPrice = 100,
+                    ProductQuantity = 5
+                });
+
+                var products = await _productService.GetProductAsync();
+
+                MessageBox.Show($"Products Count: {products.Count}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

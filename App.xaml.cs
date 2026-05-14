@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
 using Test.ShopBilling.WPFApp.Data;
+using Test.ShopBilling.WPFApp.Services;
 
 namespace Test.ShopBilling.WPFApp
 {
@@ -22,9 +22,16 @@ namespace Test.ShopBilling.WPFApp
                     //DbContext
                     services.AddDbContext<BillingDbContext>(options =>
                     {
-                        options.UseSqlite(
-                            context.Configuration.GetConnectionString("DefaultConnection"));
-                    });
+                        var dbPath = @"D:\Projects\Test.ShopBilling.WPFApp\ShopBilling.db";
+
+                        options.UseSqlite($"Data Source={dbPath}");
+
+                    }, ServiceLifetime.Singleton);
+
+                    //services.AddSingleton<BillingDbContext>();
+
+                    services.AddSingleton<IProductService, ProductService>();
+
                     services.AddSingleton<MainWindow>();
                 })
                 .Build();
