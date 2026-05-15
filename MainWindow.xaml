@@ -4,18 +4,69 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test.ShopBilling.WPFApp"
-        xmlns:userControls="clr-namespace:Test.ShopBilling.WPFApp.Views.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
+        Title="MainWindow"
+        Height="450"
+        Width="800">
 
-        <userControls:MenuBar/>
+    <StackPanel Margin="20">
 
-        <userControls:CustomInput Grid.Row="1"/>
-    </Grid>
+        <!-- Product Name -->
+
+        <TextBlock Text="Product Name"/>
+
+        <TextBox Width="200"
+                 Margin="0,5,0,10"
+                 Text="{Binding ProductName,
+                                UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Product Price -->
+
+        <TextBlock Text="Product Price"/>
+
+        <TextBox Width="200"
+                 Margin="0,5,0,10"
+                 Text="{Binding ProductPrice,
+                                UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Button -->
+
+        <Button Content="Add Product"
+                Width="150"
+                Height="40"
+                Margin="0,10,0,10"
+                Click="Button_Click"/>
+
+        <!-- Products Table -->
+
+        <DataGrid Margin="0,10,0,0"
+                  ItemsSource="{Binding Products}"
+                  AutoGenerateColumns="False"
+                  Height="200">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding ProductName}"/>
+
+                <DataGridTextColumn Header="Price"
+                                    Binding="{Binding ProductPrice}"/>
+
+                <DataGridTextColumn Header="Quantity"
+                                    Binding="{Binding ProductQuantity}"/>
+
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </StackPanel>
+
 </Window>

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using Test.ShopBilling.WPFApp.Models;
 using Test.ShopBilling.WPFApp.Services;
+using Test.ShopBilling.WPFApp.ViewModels;
 
 namespace Test.ShopBilling.WPFApp
 {
@@ -14,33 +15,21 @@ namespace Test.ShopBilling.WPFApp
 
             _productService = productService;
 
-            Loaded += MainWindow_Loaded;
+            var vm = new ProductViewModel();
+            vm.ProductName = "initial Product";
+            DataContext = vm;
         }
 
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            await TestDatabase();
-        }
+            var vm = (ProductViewModel)DataContext;
 
-        private async Task TestDatabase()
-        {
-            try
+            vm.Products.Add(new Product
             {
-                await _productService.AddProductAsync(new Product
-                {
-                    ProductName = "Rice",
-                    ProductPrice = 100,
-                    ProductQuantity = 5
-                });
-
-                var products = await _productService.GetProductAsync();
-
-                MessageBox.Show($"Products Count: {products.Count}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+                ProductName = vm.ProductName,
+                ProductPrice = vm.ProductPrice,
+                ProductQuantity = 1
+            });
         }
     }
 }
